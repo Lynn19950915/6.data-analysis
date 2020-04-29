@@ -58,7 +58,7 @@
 #  4. finish_ymd 非空值
 #  的房屋資料,並存入house變數中。[8分]
 ```
-<p>> house=lvr_prices[lvr_prices$city_land_type=="住"&lvr_prices$total_price>0&lvr_prices$building_sqmeter>0&lvr_prices$finish_ymd!="", ]　#查看str(lvr_prices$finish_ymd)可知: 空值為空白字串("")，非缺失值(<NA>)</p>
+<p>>house=lvr_prices[lvr_prices$city_land_type=="住"&lvr_prices$total_price>0&lvr_prices$building_sqmeter>0&lvr_prices$finish_ymd!="", ]　#查看str(lvr_prices$finish_ymd)可知: 空值為空白字串("")，非缺失值(<NA>)</p>
 
 
 ```{r}
