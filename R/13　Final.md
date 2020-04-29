@@ -49,8 +49,7 @@
 ```
 <p>> head(lvr_prices, 10)</p>
 
-<pre><code>
-   Unnamed..0   area  trading_target                               address land_sqmeter city_land_type trading_ymd     trading_num floor total_floor              building_type
+<pre><code>   Unnamed..0   area  trading_target                               address land_sqmeter city_land_type trading_ymd     trading_num floor total_floor              building_type
 1           0 大安區 房地(土地+建物) 臺北市大安區和平東路三段1巷72弄1~30號        19.39             住  2012-06-29 土地1建物2車位0  五層      十七層 住宅大樓(11層含以上有電梯)
 2           1 中正區 房地(土地+建物)     臺北市中正區忠孝東路二段121~150號         8.46             商  2012-07-18 土地3建物1車位0  九層      十二層               辦公商業大樓
 3           2 大同區            土地               橋北段二小段601~630地號         5.50           其他  2012-07-27 土地1建物0車位0                                         其他
@@ -72,8 +71,7 @@
 7                                                   0.00    0           0    0          有         無       50000                            0             0  6
 8      國民住宅 鋼筋混凝土造 1992-03-03           146.66    3           2    2          有         有    25800000                            0             0  7
 9        住家用 鋼筋混凝土造 1979-08-28           105.04    2           1    1          有         無    19000000                            0             0  8
-10       住家用 鋼筋混凝土造 1972-08-30           130.38    3           2    2          有         無    28000000                            0             0  9
-</code></pre>
+10       住家用 鋼筋混凝土造 1972-08-30           130.38    3           2    2          有         無    28000000                            0             0  9</code></pre>
 
 
 ```{r}
