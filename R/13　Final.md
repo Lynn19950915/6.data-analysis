@@ -3,7 +3,6 @@
 title: "R Final Homework"
 output: html_notebook
 student: DB104-(11)陳怡霖
-
 ---
 
 
