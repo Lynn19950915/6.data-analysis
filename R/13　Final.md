@@ -111,8 +111,6 @@
 11 南港區 168883. 170298  55608.
 12 萬華區 104257. 101056  55204.</code></pre>
 
---------------------------------------------------------------------------------
-
 <p>> tapply(house$price_per_sqmeter, house$area, function(e){c(mean(e), median(e), sd(e))})　#依area分組輸出(僅能為單值)，需於函式內加寫vector: c()</p>
 
 <pre><code>$士林區
@@ -171,9 +169,7 @@ $萬華區
 > house=merge(x=house, y=house_danger, all.x=T)　#left join即以house(x)資料為主。亦可寫成: merge(house, house_danger, by="ID", all.x=T)<br>
 > str(house)</p>
 
-<pre><code>
-'data.frame':   48336 obs. of  28 variables　#已增加變數danger
-</code></pre>
+<pre><code>'data.frame':   48336 obs. of  28 variables　#已增加變數danger</code></pre>
 
 
 ```{r}
@@ -185,15 +181,11 @@ $萬華區
 > testset=house[index==2,]　#從紀錄表根據符合項(反取位置)分割資料。逗號不可省略<br>
 > str(trainset)</p>
 
-<pre><code>
-'data.frame':   38640 obs. of  28 variables
-</code></pre>
+<pre><code>'data.frame':   38640 obs. of  28 variables</code></pre>
 
 <p>> str(testset)</p>
 
-<pre><code>
-'data.frame':    9696 obs. of  28 variables
-</code></pre>
+<pre><code>'data.frame':    9696 obs. of  28 variables</code></pre>
 
 
 ```{r}
