@@ -58,7 +58,7 @@
 #  4. finish_ymd 非空值
 #  的房屋資料,並存入house變數中。[8分]
 ```
-<p>>house=lvr_prices[lvr_prices$city_land_type=="住"&lvr_prices$total_price>0&lvr_prices$building_sqmeter>0&lvr_prices$finish_ymd!="", ]　#查看str(lvr_prices$finish_ymd)可知: 空值為空白字串("")，非缺失值(<NA>)</p>
+<p>> house=lvr_prices[lvr_prices$city_land_type=="住"&lvr_prices$total_price>0&lvr_prices$building_sqmeter>0&lvr_prices$finish_ymd!="", ]　#查看str(lvr_prices$finish_ymd)可知: 空值為空白字串("")，非缺失值(<NA>)</p>
 
 
 ```{r}
@@ -95,8 +95,7 @@
 + group_by(area) %>%<br>
 + summarise_at(.vars=vars(price_per_sqmeter), .funs=funs(mean, median, sd))　#對指定欄位.vars、運算指定方法.funs</p>
 
-<pre><code>
-# A tibble: 12 x 4
+<pre><code># A tibble: 12 x 4
    area      mean median      sd
    <fct>    <dbl>  <dbl>   <dbl>
  1 士林區 165804. 158733  82886.
@@ -110,15 +109,13 @@
  9 松山區 194180. 202705  75834.
 10 信義區 195851. 187912  96538.
 11 南港區 168883. 170298  55608.
-12 萬華區 104257. 101056  55204.
-</code></pre>
+12 萬華區 104257. 101056  55204.</code></pre>
 
 --------------------------------------------------------------------------------
 
 <p>> tapply(house$price_per_sqmeter, house$area, function(e){c(mean(e), median(e), sd(e))})　#依area分組輸出(僅能為單值)，需於函式內加寫vector: c()</p>
 
-<pre><code>
-$士林區
+<pre><code>$士林區
 [1] 165804.02 158733.00  82885.72
 $大同區
 [1] 138409.27 140310.00  55705.87
@@ -141,8 +138,7 @@ $信義區
 $南港區
 [1] 168882.97 170298.00  55608.19
 $萬華區
-[1] 104257.01 101056.00  55204.07
-</code></pre>
+[1] 104257.01 101056.00  55204.07</code></pre>
 
 
 ```{r}
@@ -163,9 +159,7 @@ $萬華區
 > house$building_age=as.integer(round((Sys.Date()-house$finish_ymd)/365, 0))<br>
 > str(house)</p>
 
-<pre><code>
-'data.frame':   48336 obs. of  27 variables　#已增加變數building_age
-</code></pre>
+<pre><code>'data.frame':   48336 obs. of  27 variables　#已增加變數building_age</code></pre>
 
 
 ```{r}
