@@ -10,7 +10,6 @@
 <p>> load("E:/R/riii/final/lvr_prices_big5.RData")　#若開檔後呈亂碼，則需先開啟big5<br>
 > load("E:/R/riii/final/lvr_prices.RData")</p>
 
-
 ```{r}
 #(2) 請問可使用哪個函式觀看檔案的資料結構？[5分]
 ```
