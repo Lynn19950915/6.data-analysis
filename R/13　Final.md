@@ -1,7 +1,7 @@
 
 ---
-title: "R Final Homework"
-output: html_notebook
+title: "R Final Homework"<br>
+output: html_notebook<br>
 student: DB104-(11)陳怡霖
 ---
 
