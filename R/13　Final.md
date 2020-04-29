@@ -262,12 +262,10 @@ $萬華區
 ```
 <p>> install.packages("ROCR")<br>
 > library("ROCR")<br><br>
-
 > predict2=predict(house.rp, testset, type="prob")　#predict1: class辨別分類、predict2: prob分析機率<br>
 > predict3=prediction(predict2[, "YES"], testset$danger)　#比對: testset之預測機率及實際結果<br>
 > perform1=performance(predict3, "tpr", "fpr")<br>
 > plot(perform1)　#ROC曲線: X=假陽性率, Y=真陽性率(能否在FP發生尚低時找到足多之TP樣本)<br><br>
-
 > perform2=performance(predict3, measure="auc", x.measure="cutoff")　#perform1: ROC曲線、perform2: AUC指標，均由predict3之比對結果取得<br>
 > print(perform2@y.values)</p>
 
