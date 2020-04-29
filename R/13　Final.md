@@ -1,8 +1,8 @@
 
 ---
-title: "R Final Homework"<br>
-output: html_notebook<br>
-student: DB104-(11)陳怡霖
+<h3>title: "R Final Homework"</h3>
+<h3>output: html_notebook</h3>
+<h3>student: DB104-(11)陳怡霖</h3>
 ---
 
 
