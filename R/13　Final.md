@@ -211,14 +211,12 @@ $萬華區
 ```
 <p>> house.rp$cptable</p>
 
-<pre><code>
-          CP nsplit rel error    xerror        xstd
+<pre><code>          CP nsplit rel error    xerror        xstd
 1 0.19608835      0 1.0000000 1.0000000 0.011946787
 2 0.09248019      2 0.6078233 0.6076547 0.009638361
 3 0.06592480      4 0.4228629 0.4223571 0.008160587
 4 0.02706120      5 0.3569381 0.3566009 0.007538828
-5 0.01000000      8 0.2743214 0.2748272 0.006662034　#xerror持續降低未反升，理論上可以不剪枝(which.min(house.rp$cptable[, "xerror"])=5)
-</code></pre>
+5 0.01000000      8 0.2743214 0.2748272 0.006662034　#xerror持續降低未反升，理論上可以不剪枝(which.min(house.rp$cptable[, "xerror"])=5)</code></pre>
 
 <p>> cut=house.rp$cptable[which.min(house.rp$cptable[, "xerror"]), "CP"]　#若需剪枝，設定剪枝條件: cptable[min(xerror)位置, "CP"]<br>
 > house.rp=prune(house.rp, cp=cut)</p>
@@ -234,8 +232,7 @@ $萬華區
 > library("e1071")<br>
 > confusionMatrix(table(predict1, testset$danger)　#混淆矩陣需安裝caret, e1071套件</p>
 
-<pre><code>
-　　 predict   NO  YES
+<pre><code>　　 predict   NO  YES
          NO  7784   18　#predict=N: 陽性(TP真陽、FP偽陽)
          YES  403 1491　#predict=Y: 陰性(FN偽陰、TN真陰)
                                           
@@ -257,8 +254,7 @@ $萬華區
    Detection Prevalence : 0.8047          
       Balanced Accuracy : 0.9694          
                                           
-       'Positive' Class : NO
-</code></pre>
+       'Positive' Class : NO</code></pre>
 
 
 ```{r}
@@ -275,8 +271,5 @@ $萬華區
 > perform2=performance(predict3, measure="auc", x.measure="cutoff")　#perform1: ROC曲線、perform2: AUC指標，均由predict3之比對結果取得<br>
 > print(perform2@y.values)</p>
 
-<pre><code>
-[[1]]
-[1] 0.9707122
-</code></pre>
-
+<pre><code>[[1]]
+[1] 0.9707122</code></pre>
