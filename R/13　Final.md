@@ -3,20 +3,23 @@
 title: "R Final Homework"
 output: html_notebook
 student: DB104-(11)陳怡霖
+
 ---
+
 
 ```{r}
 #(1) 請讀取final資料夾下的lvr_prices檔案 [5分]
 ```
-> load("E:/R/riii/final/lvr_prices_big5.RData")　#若開檔後呈亂碼，則需先開啟big5
-> load("E:/R/riii/final/lvr_prices.RData")
+<p>> load("E:/R/riii/final/lvr_prices_big5.RData")　#若開檔後呈亂碼，則需先開啟big5<br>
+> load("E:/R/riii/final/lvr_prices.RData")</p>
 
 
 ```{r}
 #(2) 請問可使用哪個函式觀看檔案的資料結構？[5分]
 ```
-> str(lvr_prices)　#不等同str("lvr_prices"): chr
+<p>> str(lvr_prices)　#不等同str("lvr_prices"): chr</p>
 
+<pre><code>
 'data.frame':   102054 obs. of  25 variables:
  $ Unnamed..0      : int  0 1 2 3 4 5 6 7 8 9 ...
  $ area            : Factor w/ 12 levels "士林區","大同區",..: 3 5 2 2 6 10 9 9 1 3 ...
@@ -43,13 +46,15 @@ student: DB104-(11)陳怡霖
  $ parking_sqmeter : num  0 0 0 0 0 0 0 0 0 0 ...
  $ parking_price   : int  0 0 0 0 0 0 0 0 0 0 ...
  $ ID              : Factor w/ 102054 levels "0","1","2","3",..: 1 2 3 4 5 6 7 8 9 10 ...
+</code></pre>
 
 
 ```{r}
 #(3) 請問可使用哪個函式觀看資料前10筆資料？[5分]
 ```
-> head(lvr_prices, 10)
+<p>> head(lvr_prices, 10)</p>
 
+<pre><code>
    Unnamed..0   area  trading_target                               address land_sqmeter city_land_type trading_ymd     trading_num floor total_floor              building_type
 1           0 大安區 房地(土地+建物) 臺北市大安區和平東路三段1巷72弄1~30號        19.39             住  2012-06-29 土地1建物2車位0  五層      十七層 住宅大樓(11層含以上有電梯)
 2           1 中正區 房地(土地+建物)     臺北市中正區忠孝東路二段121~150號         8.46             商  2012-07-18 土地3建物1車位0  九層      十二層               辦公商業大樓
@@ -73,6 +78,7 @@ student: DB104-(11)陳怡霖
 8      國民住宅 鋼筋混凝土造 1992-03-03           146.66    3           2    2          有         有    25800000                            0             0  7
 9        住家用 鋼筋混凝土造 1979-08-28           105.04    2           1    1          有         無    19000000                            0             0  8
 10       住家用 鋼筋混凝土造 1972-08-30           130.38    3           2    2          有         無    28000000                            0             0  9
+</code></pre>
 
 
 ```{r}
@@ -83,43 +89,46 @@ student: DB104-(11)陳怡霖
 #  4. finish_ymd 非空值
 #  的房屋資料,並存入house變數中。[8分]
 ```
-> house=lvr_prices[lvr_prices$city_land_type=="住"&lvr_prices$total_price>0&lvr_prices$building_sqmeter>0&lvr_prices$finish_ymd!="", ]　#查看str(lvr_prices$finish_ymd)可知: 空值為空白字串("")，非缺失值(<NA>)
+<p>> house=lvr_prices[lvr_prices$city_land_type=="住"&lvr_prices$total_price>0&lvr_prices$building_sqmeter>0&lvr_prices$finish_ymd!="", ]　#查看str(lvr_prices$finish_ymd)可知: 空值為空白字串("")，非缺失值(<NA>)</p>
 
 
 ```{r}
 #(5) 請使用house資料，利用房屋價格(total_price)及房屋平方米數(building_sqmeter)兩欄位，
 #    產生一新欄位為每平方米價格(price_per_sqmeter)，並將其四捨五入到整數位。[5分]
 ```
-> house$price_per_sqmeter=round(house$total_price/house$building_sqmeter, 0)　#新增欄位需註明house$
+<p>> house$price_per_sqmeter=round(house$total_price/house$building_sqmeter, 0)　#新增欄位需註明house$</p>
 
 
 ```{r}
 #(6) 請使用house資料，利用scale() 將每平方米價格(price_per_sqmeter)欄位資料標準化
 #    ，並剔除掉outlier資料(z-score > 3)。[5分]
 ```
-> house=house[abs(scale(house$price_per_meter))<=3,]　#abs將標準化結果取絕對值，且篩選<=3([-3,3])部分
+<p>> house=house[abs(scale(house$price_per_meter))<=3,]　#abs將標準化結果取絕對值，且篩選<=3([-3, 3])部分</p>
 
 
 ```{r}
 #(7) 請問在house資料中各行政區(area)的資料筆數為何? 可否畫出其長條圖? [5分]
 ```
-> summary(house$area)　#summary原本對類別資料即呈現次數統計，結果同table(house$area)
+<p>> summary(house$area)　#summary原本對類別資料即呈現次數統計，結果同table(house$area)</p>
 
+<pre><code>
 士林區 大同區 大安區 中山區 中正區 內湖區 文山區 北投區 松山區 信義區 南港區 萬華區 
   5274    983   3881   4438   2377   7793   6293   6057   2812   3085   2903   2440
+</code></pre>
 
-> barplot(summary(house$area), xlab="行政區")
+<p>> barplot(summary(house$area), xlab="行政區")</p>
 
 
 ```{r}
 #(8) 請使用house資料，計算各行政區每平方米價格(price_per_sqmeter)欄位資料的平均數，中位數及標準差 [8分]
 ```
-> install.packages("dplyr")
-> library("dplyr")
-> house %>%
-+ group_by(area) %>%
-+ summarise_at(.vars=vars(price_per_sqmeter), .funs=funs(mean, median, sd))　#對指定欄位.vars、運算指定方法.funs
+<p>> install.packages("dplyr")<br>
+> library("dplyr")<br>
+> house %>%<br>
++ group_by(area) %>%<br>
++ summarise_at(.vars=vars(price_per_sqmeter), .funs=funs(mean, median, sd))　#對指定欄位.vars、運算指定方法.funs</p>
 
+<pre><code>
 # A tibble: 12 x 4
    area      mean median      sd
    <fct>    <dbl>  <dbl>   <dbl>
@@ -135,11 +144,13 @@ student: DB104-(11)陳怡霖
 10 信義區 195851. 187912  96538.
 11 南港區 168883. 170298  55608.
 12 萬華區 104257. 101056  55204.
+</code></pre>
 
 --------------------------------------------------------------------------------
 
-> tapply(house$price_per_sqmeter, house$area, function(e){c(mean(e), median(e), sd(e))})　#依area分組輸出(僅能為單值)，需於函式內加寫vector: c()
+<p>> tapply(house$price_per_sqmeter, house$area, function(e){c(mean(e), median(e), sd(e))})　#依area分組輸出(僅能為單值)，需於函式內加寫vector: c()</p>
 
+<pre><code>
 $士林區
 [1] 165804.02 158733.00  82885.72
 $大同區
@@ -164,14 +175,15 @@ $南港區
 [1] 168882.97 170298.00  55608.19
 $萬華區
 [1] 104257.01 101056.00  55204.07
+</code></pre>
 
 
 ```{r}
 #(9) 請使用house資料,利用ggplot2的facet_wrap函數繪製各行政區房屋每平方米價格(price_per_sqmeter)的直方圖 [8分]
 ```
-> install.packages("ggplot2")
-> library("ggplot2")
-> ggplot(house, aes(x=price_per_sqmeter))+geom_histogram()+facet_wrap(~area)　#注意: graphics中函數名稱為hist()，facet_wrap乃視覺化分組彙整功能
+<p>> install.packages("ggplot2")<br>
+> library("ggplot2")<br>
+> ggplot(house, aes(x=price_per_sqmeter))+geom_histogram()+facet_wrap(~area)　#注意: graphics中函數名稱為hist()，facet_wrap乃視覺化分組彙整功能</p>
 
 
 ```{r}
@@ -180,10 +192,13 @@ $萬華區
 #hint2: 一年請以365天計算，四捨五入至整數位
 #hint3: 將運算完的資料轉為整數型態(integer) [8分]
 ```
-> house$finish_ymd=as.Date(house$finish_ymd)　#查看str(house$finish_ymd): factor無法做時間運算
-> house$building_age=as.integer(round((Sys.Date()-house$finish_ymd)/365, 0))
-> str(house)
+<p>> house$finish_ymd=as.Date(house$finish_ymd)　#查看str(house$finish_ymd): factor無法做時間運算<br>
+> house$building_age=as.integer(round((Sys.Date()-house$finish_ymd)/365, 0))<br>
+> str(house)</p>
+
+<pre><code>
 'data.frame':   48336 obs. of  27 variables　#已增加變數building_age
+</code></pre>
 
 
 ```{r}
@@ -191,23 +206,33 @@ $萬華區
 #     並將house資料集和house_danger資料集以left outer join方式join起來，
 #     存回house變數中 [5分]
 ```
-> load("E:/R/riii/final/house_danger.RData")
-> house=merge(x=house, y=house_danger, all.x=T)　#left join即以house(x)資料為主。亦可寫成: merge(house, house_danger, by="ID", all.x=T)
-> str(house)
+<p>> load("E:/R/riii/final/house_danger.RData")<br>
+> house=merge(x=house, y=house_danger, all.x=T)　#left join即以house(x)資料為主。亦可寫成: merge(house, house_danger, by="ID", all.x=T)<br>
+> str(house)</p>
+
+<pre><code>
 'data.frame':   48336 obs. of  28 variables　#已增加變數danger
+</code></pre>
 
 
 ```{r}
 #(12) 請將house資料以8:2的比例分為訓練集和測試集，
 #     將訓練集資料存在trainset變數中，將測試集資料存在testset變數中。 [5分]
 ```
-> index=sample(2, nrow(house), replace=T, prob=c(0.8, 0.2))　#依比例抽取nrow次，replace: 取後可放回
-> trainset=house[index==1,]
-> testset=house[index==2,]　#從紀錄表根據符合項(反取位置)分割資料。逗號不可省略
-> str(trainset)
+<p>> index=sample(2, nrow(house), replace=T, prob=c(0.8, 0.2))　#依比例抽取nrow次，replace: 取後可放回<br>
+> trainset=house[index==1,]<br>
+> testset=house[index==2,]　#從紀錄表根據符合項(反取位置)分割資料。逗號不可省略<br>
+> str(trainset)</p>
+
+<pre><code>
 'data.frame':   38640 obs. of  28 variables
-> str(testset)
+</code></pre>
+
+<p>> str(testset)</p>
+
+<pre><code>
 'data.frame':    9696 obs. of  28 variables
+</code></pre>
 
 
 ```{r}
@@ -216,46 +241,49 @@ $萬華區
 #     房屋類型(building_type)及每平方米價格(price_per_sqmeter)
 #     5個變數作為解釋變數放入模型當中建模，並將模型存在house.rp變數中。 [5分]
 ```
-> install.packages("rpart")
-> library("rpart")
-> house.rp=rpart(danger~area+building_age+building_sqmeter+building_type+price_per_sqmeter, data=trainset)　#建模: 預測變數~解釋變數(以加號相連接，非逗號分隔)
+<p>> install.packages("rpart")<br>
+> library("rpart")<br>
+> house.rp=rpart(danger~area+building_age+building_sqmeter+building_type+price_per_sqmeter, data=trainset)　#建模: 預測變數~解釋變數(以加號相連接，非逗號分隔)</p>
 
 
 ```{r}
 #(14) 請利用plot()和text()畫出house.rp模型的決策樹 [5分]
 ```
-> plot(house.rp)　#畫出決策樹骨幹
-> text(house.rp, use.n=T)　#標示決策樹叢目(use.n加上樣本數據)
+<p>> plot(house.rp)　#畫出決策樹骨幹<br>
+> text(house.rp, use.n=T)　#標示決策樹叢目(use.n加上樣本數據)</p>
 
 
 ```{r}
 #(15) 請問此決策樹是否需要進行剪枝(prune)？如需剪枝請將修剪後的模型存回house.rp中。 [5分]
 ```
-> house.rp$cptable
+<p>> house.rp$cptable</p>
 
+<pre><code>
           CP nsplit rel error    xerror        xstd
 1 0.19608835      0 1.0000000 1.0000000 0.011946787
 2 0.09248019      2 0.6078233 0.6076547 0.009638361
 3 0.06592480      4 0.4228629 0.4223571 0.008160587
 4 0.02706120      5 0.3569381 0.3566009 0.007538828
 5 0.01000000      8 0.2743214 0.2748272 0.006662034　#xerror持續降低未反升，理論上可以不剪枝(which.min(house.rp$cptable[, "xerror"])=5)
+</code></pre>
 
-> cut=house.rp$cptable[which.min(house.rp$cptable[, "xerror"]), "CP"]　#若需剪枝，設定剪枝條件: cptable[min(xerror)位置, "CP"]
-> house.rp=prune(house.rp, cp=cut)
+<p>> cut=house.rp$cptable[which.min(house.rp$cptable[, "xerror"]), "CP"]　#若需剪枝，設定剪枝條件: cptable[min(xerror)位置, "CP"]<br>
+> house.rp=prune(house.rp, cp=cut)</p>
 
 
 ```{r}
 #(16) 請將測試集資料(testset)放入模型中進行驗證，請問此模型的accuracy, precision, recall等績效分別為何？ [5分]
 ```
-> predict1=predict(house.rp, testset, type="class")
-> install.packages("caret")
-> library("caret")
-> install.packages("e1071")
-> library("e1071")
-> confusionMatrix(table(predict1, testset$danger)　#混淆矩陣需安裝caret, e1071套件
+<p>> predict1=predict(house.rp, testset, type="class")<br>
+> install.packages("caret")<br>
+> library("caret")<br>
+> install.packages("e1071")<br>
+> library("e1071")<br>
+> confusionMatrix(table(predict1, testset$danger)　#混淆矩陣需安裝caret, e1071套件</p>
 
+<pre><code>
 　　 predict   NO  YES
-    　　 NO  7784   18　#predict=N: 陽性(TP真陽、FP偽陽)
+         NO  7784   18　#predict=N: 陽性(TP真陽、FP偽陽)
          YES  403 1491　#predict=Y: 陰性(FN偽陰、TN真陰)
                                           
                Accuracy : 0.9566　#accuracy 95.66%: TP+TN/ALL          
@@ -276,21 +304,26 @@ $萬華區
    Detection Prevalence : 0.8047          
       Balanced Accuracy : 0.9694          
                                           
-       'Positive' Class : NO    
+       'Positive' Class : NO
+</code></pre>
 
 
 ```{r}
 #(17) 請繪製出此模型的ROC曲線，並計算其AUC [8分]
 ```
-> install.packages("ROCR")
-> library("ROCR")
+<p>> install.packages("ROCR")<br>
+> library("ROCR")<br><br>
 
-> predict2=predict(house.rp, testset, type="prob")　#predict1: class辨別分類、predict2: prob分析機率
-> predict3=prediction(predict2[, "YES"], testset$danger)　#比對: testset之預測機率及實際結果
-> perform1=performance(predict3, "tpr", "fpr")
-> plot(perform1)　#ROC曲線: X=假陽性率, Y=真陽性率(能否在FP發生尚低時找到足多之TP樣本)
+> predict2=predict(house.rp, testset, type="prob")　#predict1: class辨別分類、predict2: prob分析機率<br>
+> predict3=prediction(predict2[, "YES"], testset$danger)　#比對: testset之預測機率及實際結果<br>
+> perform1=performance(predict3, "tpr", "fpr")<br>
+> plot(perform1)　#ROC曲線: X=假陽性率, Y=真陽性率(能否在FP發生尚低時找到足多之TP樣本)<br><br>
 
-> perform2=performance(predict3, measure="auc", x.measure="cutoff")　#perform1: ROC曲線、perform2: AUC指標，均由predict3之比對結果取得
-> print(perform2@y.values)
+> perform2=performance(predict3, measure="auc", x.measure="cutoff")　#perform1: ROC曲線、perform2: AUC指標，均由predict3之比對結果取得<br>
+> print(perform2@y.values)</p>
+
+<pre><code>
 [[1]]
 [1] 0.9707122
+</code></pre>
+
